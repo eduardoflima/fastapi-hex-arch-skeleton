@@ -20,9 +20,10 @@ def get_items(service: ItemServiceDep) -> List[ItemResponse]:
     return [ItemResponse.from_item(i) for i in items]
 
 
-@router.get("/{item_id}")
-def get_item(item_id: int):
-    return ItemResponse(id=item_id, name="some item")
+@router.get("/{item_id}", response_model=ItemResponse)
+def get_item(item_id: int, service: ItemServiceDep):
+    item = service.getItem(item_id)
+    return ItemResponse.from_item(item)
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
