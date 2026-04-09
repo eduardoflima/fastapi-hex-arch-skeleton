@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from src.main import app
-from src.domain.models.item import ItemResponse
+from src.adapters.inbound.api.schemas import ItemResponse
 
 client = TestClient(app)
 

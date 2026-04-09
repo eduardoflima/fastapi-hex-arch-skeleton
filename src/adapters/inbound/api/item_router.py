@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 
-from src.domain.models.item import ItemResponse, ItemCreateRequest, ItemUpdateRequest
+from src.adapters.inbound.api.schemas import ItemResponse, ItemCreateRequest, ItemUpdateRequest
 
 next_id = 1
 
