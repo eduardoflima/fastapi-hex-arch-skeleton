@@ -1,12 +1,7 @@
-from pydantic import BaseModel
+class Item:
+    id: int = 0
+    name: str = ""
 
-class ItemCreateRequest(BaseModel):
-    name: str
-
-class ItemUpdateRequest(BaseModel):
-    id: int
-    name: str
-
-class ItemResponse(BaseModel):
-    id: int
-    name: str
+    def __init__(self, id: int, name: str):
+        self.id = id
+        self.name = name
