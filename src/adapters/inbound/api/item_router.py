@@ -1,14 +1,23 @@
+from typing import List
+
 from fastapi import APIRouter, status
 
-from src.adapters.inbound.api.schemas import ItemResponse, ItemCreateRequest, ItemUpdateRequest
+from src.adapters.inbound.api.schemas import (
+    ItemResponse,
+    ItemCreateRequest,
+    ItemUpdateRequest,
+)
+from src.dependencies import ItemServiceDep
 
 next_id = 1
 
 router = APIRouter(prefix="/items")
 
-@router.get("/")
-def get_items():
-    return [ItemResponse(id=1, name="some item")]
+
+@router.get("/", response_model=list[ItemResponse])
+def get_items(service: ItemServiceDep) -> List[ItemResponse]:
+    items = service.getItems()
+    return [ItemResponse.from_item(i) for i in items]
 
 
 @router.get("/{item_id}")
