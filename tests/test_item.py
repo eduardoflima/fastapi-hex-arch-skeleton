@@ -29,5 +29,5 @@ def test_update_item():
     assert response.json() == ItemResponse(id=1, name="some item changed").model_dump()
 
 def test_delete_item():
-    response = client.delete("/items/1")
+    response = client.delete("/items/10")
     assert response.status_code == 204

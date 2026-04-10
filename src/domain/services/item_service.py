@@ -19,4 +19,4 @@ class ItemService(ItemServicePort):
         return Item(id=id, name=name)
 
     def deleteItem(self, id: int) -> None:
-        raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
+        print(f"deleted item id {id}")

@@ -24,7 +24,7 @@ def get_item(item_id: int, service: ItemServiceDep):
     return ItemResponse.from_item(item)
 
 
-@router.post("/",  response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
 def create_item(item: ItemCreateRequest, service: ItemServiceDep):
     item = service.createItem(item.name)
     return ItemResponse.from_item(item)
@@ -37,5 +37,5 @@ def update_item(item: ItemUpdateRequest, service: ItemServiceDep):
 
 
 @router.delete("/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_item(item_id: int):
-    print("deleted")
+def delete_item(item_id: int, service: ItemServiceDep):
+    service.deleteItem(item_id)
