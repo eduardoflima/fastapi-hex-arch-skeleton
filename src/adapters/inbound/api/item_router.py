@@ -9,8 +9,6 @@ from src.adapters.inbound.api.schemas import (
 )
 from src.dependencies import ItemServiceDep
 
-next_id = 1
-
 router = APIRouter(prefix="/items")
 
 
@@ -26,11 +24,10 @@ def get_item(item_id: int, service: ItemServiceDep):
     return ItemResponse.from_item(item)
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
-def create_item(item: ItemCreateRequest):
-    global next_id
-    next_id += 1
-    return ItemResponse(id=next_id, name=item.name)
+@router.post("/",  response_model=ItemResponse, status_code=status.HTTP_201_CREATED)
+def create_item(item: ItemCreateRequest, service: ItemServiceDep):
+    item = service.createItem(item.name)
+    return ItemResponse.from_item(item)
 
 
 @router.put("/{item_id}")

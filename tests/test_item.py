@@ -18,9 +18,9 @@ def test_retrieve_item():
 
 
 def test_create_item():
-    response = client.post("/items", json={ "name": "some item" })
+    response = client.post("/items", json={ "name": "some new item" })
     assert response.status_code == 201
-    assert response.json() == ItemResponse(id=2, name="some item").model_dump()
+    assert response.json() == ItemResponse(id=2, name="some new item").model_dump()
 
 
 def test_update_item():

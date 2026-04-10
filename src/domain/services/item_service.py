@@ -13,7 +13,7 @@ class ItemService(ItemServicePort):
         return Item(id=id, name="some existing item")
 
     def createItem(self, name: str) -> Item:
-        raise NotImplementedError("NOT_IMPLEMENTED_ERROR_MSG")
+        return Item(id=2, name=name)
 
     def updateItem(self, id: int, name: str) -> Item:
         raise NotImplementedError("NOT_IMPLEMENTED_ERROR_MSG")
