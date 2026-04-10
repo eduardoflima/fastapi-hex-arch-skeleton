@@ -1,12 +1,22 @@
 from fastapi import Depends
 from typing import Annotated
 
+from src.adapters.outbound.persistence.in_memory_item_repository import (
+    InMemoryItemRepository,
+)
+from src.domain.ports.item_repository_port import ItemRepositoryPort
 from src.domain.ports.item_service_port import ItemServicePort
 from src.domain.services.item_service import ItemService
 
 
-def get_item_service() -> ItemServicePort:
-    return ItemService()
+def get_item_repository() -> ItemRepositoryPort:
+    return InMemoryItemRepository()
+
+
+def get_item_service(
+    repository: Annotated[ItemRepositoryPort, Depends(get_item_repository)],
+) -> ItemServicePort:
+    return ItemService(repository=repository)
 
 
 ItemServiceDep = Annotated[ItemServicePort, Depends(get_item_service)]
