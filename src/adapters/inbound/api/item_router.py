@@ -30,9 +30,10 @@ def create_item(item: ItemCreateRequest, service: ItemServiceDep):
     return ItemResponse.from_item(item)
 
 
-@router.put("/{item_id}")
-def update_item(item: ItemUpdateRequest):
-    return ItemResponse(id=item.id, name=item.name)
+@router.put("/{item_id}", response_model=ItemResponse)
+def update_item(item: ItemUpdateRequest, service: ItemServiceDep):
+    item = service.updateItem(item.id, item.name)
+    return ItemResponse.from_item(item)
 
 
 @router.delete("/{item_id}", status_code=status.HTTP_204_NO_CONTENT)
