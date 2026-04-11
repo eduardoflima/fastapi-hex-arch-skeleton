@@ -5,10 +5,11 @@ from src.domain.models.item import Item
 
 NOT_IMPLEMENTED_ERROR_MSG: Final = "Method not implemented"
 
+
 class ItemRepositoryPort(ABC):
 
     @abstractmethod
-    def get_all(self) -> List[Item]:
+    def get_all(self) -> dict[int, Item]:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod
@@ -24,5 +25,5 @@ class ItemRepositoryPort(ABC):
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod
-    def delete(self, item: Item) -> bool:
+    def delete(self, id: int) -> bool:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
