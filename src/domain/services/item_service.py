@@ -21,7 +21,7 @@ class ItemService(ItemServicePort):
     def createItem(self, name: str) -> Item:
         return self._repository.create(Item(id=None, name=name))
 
-    def updateItem(self, id: int, name: str) -> Item:
+    def updateItem(self, id: int, name: str) -> Item | None:
         return self._repository.update(Item(id, name))
 
     def deleteItem(self, id: int) -> None:

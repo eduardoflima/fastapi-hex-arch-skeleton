@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, HTTPException
 
 from src.adapters.inbound.api.schemas import (
     ItemResponse,
@@ -33,6 +33,10 @@ def create_item(item: ItemCreateRequest, service: ItemServiceDep):
 @router.put("/{item_id}", response_model=ItemResponse)
 def update_item(item: ItemUpdateRequest, service: ItemServiceDep):
     item = service.updateItem(item.id, item.name)
+
+    if item is None:
+        raise HTTPException(status_code=404)
+
     return ItemResponse.from_item(item)
 
 

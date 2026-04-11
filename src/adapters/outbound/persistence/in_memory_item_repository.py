@@ -23,12 +23,12 @@ class InMemoryItemRepository(ItemRepositoryPort):
         self._items[item.id] = item
         return self._items[item.id]
 
-    def update(self, item: Item) -> Item:
+    def update(self, item: Item) -> Item | None:
         if item.id is None:
             raise RuntimeError("Item does not has an ID. It cannot be updated")
 
-        if self._items[item.id] is None:
-            raise RuntimeError("Item not found")
+        if self._items.get(item.id) is None:
+            return None
 
         self._items[item.id] = item
 

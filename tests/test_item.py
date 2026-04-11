@@ -28,6 +28,11 @@ def test_update_item():
     assert response.status_code == 200
     assert response.json() == ItemResponse(id=1, name="some item changed").model_dump()
 
+
+def test_update_fails_when_item_does_not_exist():
+    response = client.put("/items/1", json={ "id": 99, "name": "some unexisting item" })
+    assert response.status_code == 404
+
 def test_delete_item():
     response = client.post("/items", json={ "name": "to be deleted item" })
     assert response.status_code == 201
