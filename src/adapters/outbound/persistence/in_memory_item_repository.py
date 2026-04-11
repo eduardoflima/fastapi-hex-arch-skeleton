@@ -14,8 +14,8 @@ class InMemoryItemRepository(ItemRepositoryPort):
     def get_all(self) -> dict[int, Item]:
         return self._items
 
-    def get_by_id(self, id: int) -> Item:
-        return self._items[id]
+    def get_by_id(self, id: int) -> Item | None:
+        return self._items.get(id)
 
     def create(self, item: Item) -> Item:
         self._next_id += 1

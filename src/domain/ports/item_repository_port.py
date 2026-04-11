@@ -13,7 +13,7 @@ class ItemRepositoryPort(ABC):
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod
-    def get_by_id(self, id: int) -> Item:
+    def get_by_id(self, id: int) -> Item | None:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod
@@ -21,7 +21,7 @@ class ItemRepositoryPort(ABC):
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod
-    def update(self, item: Item) -> Item:
+    def update(self, item: Item) -> Item | None:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod

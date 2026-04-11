@@ -21,6 +21,10 @@ def get_items(service: ItemServiceDep) -> List[ItemResponse]:
 @router.get("/{item_id}", response_model=ItemResponse)
 def get_item(item_id: int, service: ItemServiceDep):
     item = service.getItem(item_id)
+
+    if item is None:
+        raise HTTPException(status_code=404)
+
     return ItemResponse.from_item(item)
 
 
