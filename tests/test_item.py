@@ -14,7 +14,7 @@ def test_retrieve_items():
 def test_retrieve_item():
     response = client.get("/items/1")
     assert response.status_code == 200
-    assert response.json() == ItemResponse(id=1, name="some existing item").model_dump()
+    assert response.json() == ItemResponse(id=1, name="some item").model_dump()
 
 
 def test_create_item():
@@ -29,5 +29,9 @@ def test_update_item():
     assert response.json() == ItemResponse(id=1, name="some item changed").model_dump()
 
 def test_delete_item():
-    response = client.delete("/items/10")
+    response = client.post("/items", json={ "name": "to be deleted item" })
+    assert response.status_code == 201
+    newly_created_id = response.json()["id"]
+
+    response = client.delete(f"/items/{newly_created_id}")
     assert response.status_code == 204
