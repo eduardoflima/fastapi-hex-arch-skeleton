@@ -8,9 +8,10 @@ from src.domain.ports.item_repository_port import ItemRepositoryPort
 from src.domain.ports.item_service_port import ItemServicePort
 from src.domain.services.item_service import ItemService
 
+_item_repository = InMemoryItemRepository()
 
 def get_item_repository() -> ItemRepositoryPort:
-    return InMemoryItemRepository()
+    return _item_repository
 
 
 def get_item_service(
