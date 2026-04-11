@@ -8,7 +8,7 @@ NOT_IMPLEMENTED_ERROR_MSG: Final = "Method not implemented"
 class ItemServicePort(ABC):
 
     @abstractmethod
-    def getItems(self) -> List[Item]:
+    def getItems(self) -> list[Item]:
         raise NotImplementedError(NOT_IMPLEMENTED_ERROR_MSG)
 
     @abstractmethod

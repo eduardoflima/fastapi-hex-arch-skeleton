@@ -8,19 +8,21 @@ from src.domain.ports.item_service_port import ItemServicePort
 class ItemService(ItemServicePort):
 
     def __init__(self, repository: ItemRepositoryPort) -> Self:
-        self.repository = repository
+        self._repository = repository
 
-    def getItems(self) -> List[Item]:
-        return self.repository.get_all()
+    def getItems(self) -> list[Item]:
+        return list(
+            self._repository.get_all().values()
+        )
 
     def getItem(self, id: int) -> Item:
-        return Item(id=id, name="some existing item")
+        return self._repository.get_by_id(id)
 
     def createItem(self, name: str) -> Item:
-        return Item(id=2, name=name)
+        return self._repository.create(Item(id=None, name=name))
 
     def updateItem(self, id: int, name: str) -> Item:
-        return Item(id=id, name=name)
+        return self._repository.update(Item(id, name))
 
     def deleteItem(self, id: int) -> None:
-        print(f"deleted item id {id}")
+        self._repository.delete(id)
