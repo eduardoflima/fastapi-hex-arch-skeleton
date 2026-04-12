@@ -1,12 +1,13 @@
 from typing import List
 
+from src.config import Settings
 from src.domain.models.item import Item
 from src.domain.ports.item_repository_port import ItemRepositoryPort
 
 
 class InMemoryItemRepository(ItemRepositoryPort):
-    def __init__(self):
-        self._next_id = 1
+    def __init__(self, settings: Settings):
+        self._next_id = settings.first_id
         default_item = Item(id=self._next_id, name="some item")
 
         self._items: dict[int, Item] = {default_item.id: default_item}

@@ -7,5 +7,10 @@ __pycache__/
 # Test / coverage artifacts
 .pytest_cache/
 
+# Local environment files
+.env
+.env.*
+!.env.example
+
 # OS files
 .DS_Store
